@@ -282,7 +282,7 @@ export default function Playground({
               }
             />
             <NameValueRow
-              name="Agent connected"
+              name="Агент в сети"
               value={
                 isAgentConnected ? (
                   "TRUE"
@@ -361,7 +361,7 @@ export default function Playground({
   let mobileTabs: PlaygroundTab[] = [];
   if (config.settings.outputs.video) {
     mobileTabs.push({
-      title: "Video",
+      title: "Видео",
       content: (
         <PlaygroundTile
           className="w-full h-full grow"
@@ -375,7 +375,7 @@ export default function Playground({
 
   if (config.settings.outputs.audio) {
     mobileTabs.push({
-      title: "Audio",
+      title: "Аудио",
       content: (
         <PlaygroundTile
           className="w-full h-full grow"
@@ -387,15 +387,17 @@ export default function Playground({
     });
   }
 
-  if (config.settings.chat) {
-    mobileTabs.push({
-      title: "Chat",
-      content: chatTileContent,
-    });
-  }
+//  if (config.settings.chat) {
+//    mobileTabs.push({
+//      title: "Chat",
+//      content: chatTileContent,
+//    });
+//  }
+
+
 
   mobileTabs.push({
-    title: "Settings",
+    title: "Настройки",
     content: (
       <PlaygroundTile
         padding={false}
@@ -407,6 +409,15 @@ export default function Playground({
       </PlaygroundTile>
     ),
   });
+
+
+
+  mobileTabs.push({
+    title: "Чат",
+    content: chatTileContent,
+  });
+  
+
 
   return (
     <>
