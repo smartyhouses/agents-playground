@@ -25,8 +25,8 @@ export default async function handleToken(
       return;
     }
 
-    const roomName = `room-1111-aaaa`;
-    //const roomName = `room-${generateRandomAlphanumeric(4)}-${generateRandomAlphanumeric(4)}`;
+    //const roomName = `room-1111-aaaa`;
+    const roomName = `room-${generateRandomAlphanumeric(4)}-${generateRandomAlphanumeric(4)}`;
     const identity = `identity-${generateRandomAlphanumeric(4)}`
 
     const grant: VideoGrant = {
