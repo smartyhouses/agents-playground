@@ -388,7 +388,7 @@ export default function Playground({
 
   if (config.settings.chat) {
     mobileTabs.push({
-      title: "Chat",
+      title: "Чат",
       content: chatTileContent,
     });
   }
