@@ -120,14 +120,14 @@ export default function Playground({
 
     const disconnectedContent = (
       <div className="flex items-center justify-center text-gray-700 text-center w-full h-full">
-        No video track. Connect to get started.
+        Жду подключения
       </div>
     );
 
     const loadingContent = (
       <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center h-full w-full">
         <LoadingSVG />
-        Waiting for video track
+        Момент...
       </div>
     );
 
@@ -169,14 +169,14 @@ export default function Playground({
   const audioTileContent = useMemo(() => {
     const disconnectedContent = (
       <div className="flex flex-col items-center justify-center gap-2 text-gray-700 text-center w-full">
-        No audio track. Connect to get started.
+        Нет звука, подключитесь для начала диалога
       </div>
     );
 
     const waitingContent = (
       <div className="flex flex-col items-center gap-2 text-gray-700 text-center w-full">
         <LoadingSVG />
-        Waiting for audio track
+        Ожидание аудио
       </div>
     );
 
@@ -240,15 +240,15 @@ export default function Playground({
     return (
       <div className="flex flex-col gap-4 h-full w-full items-start overflow-y-auto">
         {config.description && (
-          <ConfigurationPanelItem title="Description">
+          <ConfigurationPanelItem title="Описание">
             {config.description}
           </ConfigurationPanelItem>
         )}
 
-        <ConfigurationPanelItem title="Settings">
+        <ConfigurationPanelItem title="Настройки">
           <div className="flex flex-col gap-4">
             <EditableNameValueRow
-              name="Room"
+              name="чат"
               value={roomState === ConnectionState.Connected ? name : config.settings.room_name}
               valueColor={`${config.settings.theme_color}-500`}
               onValueChange={(value) => {
@@ -256,11 +256,11 @@ export default function Playground({
                 newSettings.room_name = value;
                 setUserSettings(newSettings);
               }}
-              placeholder="Enter room name"
+              placeholder="ID чата"
               editable={roomState !== ConnectionState.Connected}
             />
             <EditableNameValueRow
-              name="Participant"
+              name="e-mail"
               value={roomState === ConnectionState.Connected ? 
                 (localParticipant?.identity || '') : 
                 (config.settings.participant_name || '')}
@@ -270,50 +270,13 @@ export default function Playground({
                 newSettings.participant_name = value;
                 setUserSettings(newSettings);
               }}
-              placeholder="Enter participant id"
+              placeholder="электрический п/я"
               editable={roomState !== ConnectionState.Connected}
             />
           </div>
           
-          
         </ConfigurationPanelItem>
         
-        <ConfigurationPanelItem title="Status">
-          <div className="flex flex-col gap-2">
-            <NameValueRow
-              name="Room connected"
-              value={
-                roomState === ConnectionState.Connecting ? (
-                  <LoadingSVG diameter={16} strokeWidth={2} />
-                ) : (
-                  roomState.toUpperCase()
-                )
-              }
-              valueColor={
-                roomState === ConnectionState.Connected
-                  ? `${config.settings.theme_color}-500`
-                  : "gray-500"
-              }
-            />
-            <NameValueRow
-              name="Agent connected"
-              value={
-                voiceAssistant.agent ? (
-                  "TRUE"
-                ) : roomState === ConnectionState.Connected ? (
-                  <LoadingSVG diameter={12} strokeWidth={2} />
-                ) : (
-                  "FALSE"
-                )
-              }
-              valueColor={
-                voiceAssistant.agent
-                  ? `${config.settings.theme_color}-500`
-                  : "gray-500"
-              }
-            />
-          </div>
-        </ConfigurationPanelItem>
         {roomState === ConnectionState.Connected && config.settings.inputs.screen && (
           <ConfigurationPanelItem
             title="Screen"
@@ -335,7 +298,7 @@ export default function Playground({
         )}
         {localCameraTrack && (
           <ConfigurationPanelItem
-            title="Camera"
+            title="Камера"
             source={Track.Source.Camera}
           >
             <div className="relative">
@@ -348,7 +311,7 @@ export default function Playground({
         )}
         {localMicTrack && (
           <ConfigurationPanelItem
-            title="Microphone"
+            title="Микрофон"
             source={Track.Source.Microphone}
           >
             <AudioInputTile trackRef={localMicTrack} />
@@ -397,7 +360,7 @@ export default function Playground({
   let mobileTabs: PlaygroundTab[] = [];
   if (config.settings.outputs.video) {
     mobileTabs.push({
-      title: "Video",
+      title: "Видео",
       content: (
         <PlaygroundTile
           className="w-full h-full grow"
@@ -411,7 +374,7 @@ export default function Playground({
 
   if (config.settings.outputs.audio) {
     mobileTabs.push({
-      title: "Audio",
+      title: "Звук",
       content: (
         <PlaygroundTile
           className="w-full h-full grow"
@@ -431,7 +394,7 @@ export default function Playground({
   }
 
   mobileTabs.push({
-    title: "Settings",
+    title: "Настройки",
     content: (
       <PlaygroundTile
         padding={false}
@@ -477,7 +440,7 @@ export default function Playground({
         >
           {config.settings.outputs.video && (
             <PlaygroundTile
-              title="Video"
+              title="Видео"
               className="w-full h-full grow"
               childrenClassName="justify-center"
             >
@@ -486,7 +449,7 @@ export default function Playground({
           )}
           {config.settings.outputs.audio && (
             <PlaygroundTile
-              title="Audio"
+              title="Звук"
               className="w-full h-full grow"
               childrenClassName="justify-center"
             >
@@ -497,7 +460,7 @@ export default function Playground({
 
         {config.settings.chat && (
           <PlaygroundTile
-            title="Chat"
+            title="Чат"
             className="h-full grow basis-1/4 hidden lg:flex"
           >
             {chatTileContent}
