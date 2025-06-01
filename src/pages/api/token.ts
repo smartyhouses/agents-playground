@@ -5,9 +5,6 @@ import { AccessToken } from "livekit-server-sdk";
 import type { AccessTokenOptions, VideoGrant } from "livekit-server-sdk";
 import { TokenResult } from "../../lib/types";
 
-//import { useConfig } from "../../hooks/useConfig";
-//const { config } = useConfig();
-
 const apiKey = process.env.LIVEKIT_API_KEY;
 const apiSecret = process.env.LIVEKIT_API_SECRET;
 
@@ -27,11 +24,15 @@ export default async function handleToken(
       res.status(500).end();
       return;
     }
+
+    // Get room name from query params or generate random one
+    const roomName = req.query.roomName as string || 
+      `room-${generateRandomAlphanumeric(4)}-${generateRandomAlphanumeric(4)}`;
     
-    //const roomName = config.settings.room || `room-${generateRandomAlphanumeric(4)}-${generateRandomAlphanumeric(4)}`;
-    //const identity = config.settings.user || `identity-${generateRandomAlphanumeric(4)}`;
-    const roomName = `room-${generateRandomAlphanumeric(4)}-${generateRandomAlphanumeric(4)}`;
-    const identity = `identity-${generateRandomAlphanumeric(4)}`;
+    // Get participant name from query params or generate random one
+    const identity = req.query.participantName as string || 
+      `identity-${generateRandomAlphanumeric(4)}`;
+
     const grant: VideoGrant = {
       room: roomName,
       roomJoin: true,
