@@ -1,6 +1,5 @@
 "use client";
 
-import { AttributeItem } from "@/lib/types";
 import { getCookie, setCookie } from "cookies-next";
 import jsYaml from "js-yaml";
 import { useRouter } from "next/navigation";
@@ -27,7 +26,6 @@ export type UserSettings = {
   chat: boolean;
   inputs: {
     camera: boolean;
-    screen: boolean;
     mic: boolean;
   };
   outputs: {
@@ -36,26 +34,19 @@ export type UserSettings = {
   };
   ws_url: string;
   token: string;
-  room_name: string;
-  participant_id: string;
-  participant_name: string;
-  agent_name?: string;
-  metadata?: string;
-  attributes?: AttributeItem[];
 };
 
 // Fallback if NEXT_PUBLIC_APP_CONFIG is not set
 const defaultConfig: AppConfig = {
   title: "LiveKit Agents Playground",
-  description: "A virtual workbench for testing multimodal AI agents.",
-  video_fit: "contain",
+  description: "A playground for testing LiveKit Agents",
+  video_fit: "cover",
   settings: {
     editable: true,
     theme_color: "cyan",
     chat: true,
     inputs: {
       camera: true,
-      screen: true,
       mic: true,
     },
     outputs: {
@@ -64,11 +55,6 @@ const defaultConfig: AppConfig = {
     },
     ws_url: "",
     token: "",
-    room_name: "",
-    participant_id: "",
-    participant_name: "",
-    metadata: "",
-    attributes: [],
   },
   show_qr: false,
 };
@@ -78,7 +64,7 @@ const useAppConfig = (): AppConfig => {
     if (process.env.NEXT_PUBLIC_APP_CONFIG) {
       try {
         const parsedConfig = jsYaml.load(
-          process.env.NEXT_PUBLIC_APP_CONFIG,
+          process.env.NEXT_PUBLIC_APP_CONFIG
         ) as AppConfig;
         if (parsedConfig.settings === undefined) {
           parsedConfig.settings = defaultConfig.settings;
@@ -106,7 +92,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const appConfig = useAppConfig();
   const router = useRouter();
   const [localColorOverride, setLocalColorOverride] = useState<string | null>(
-    null,
+    null
   );
 
   const getSettingsFromUrl = useCallback(() => {
@@ -127,7 +113,6 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       theme_color: params.get("theme_color"),
       inputs: {
         camera: params.get("cam") === "1",
-        screen: params.get("screen") === "1",
         mic: params.get("mic") === "1",
       },
       outputs: {
@@ -137,9 +122,6 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       },
       ws_url: "",
       token: "",
-      room_name: "",
-      participant_id: "",
-      participant_name: "",
     } as UserSettings;
   }, [appConfig]);
 
@@ -160,7 +142,6 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       const obj = new URLSearchParams({
         cam: boolToString(us.inputs.camera),
         mic: boolToString(us.inputs.mic),
-        screen: boolToString(us.inputs.screen),
         video: boolToString(us.outputs.video),
         audio: boolToString(us.outputs.audio),
         chat: boolToString(us.chat),
@@ -169,7 +150,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       // Note: We don't set ws_url and token to the URL on purpose
       router.replace("/#" + obj.toString());
     },
-    [router],
+    [router]
   );
 
   const setCookieSettings = useCallback((us: UserSettings) => {
@@ -229,7 +210,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
         };
       });
     },
-    [appConfig, setCookieSettings, setUrlSettings],
+    [appConfig, setCookieSettings, setUrlSettings]
   );
 
   const [config, _setConfig] = useState<AppConfig>(getConfig());

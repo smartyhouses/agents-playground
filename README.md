@@ -11,10 +11,8 @@
 # LiveKit Agents Playground
 
 <!--BEGIN_DESCRIPTION-->
-
-The Agents Playground is designed for quickly prototyping with server side agents built with [LiveKit Agents Framework](https://github.com/livekit/agents). Easily tap into LiveKit WebRTC sessions and process or generate audio, video, and data streams.
-The playground includes components to fully interact with any LiveKit agent, through video, audio and chat.
-
+The Agent Playground is designed for quickly prototyping with server side agents built with [LiveKit Agents Framework](https://github.com/livekit/agents). Easily tap into LiveKit WebRTC sessions and process or generate audio, video, and data streams.
+  The playground includes components to fully interact with any LiveKit agent, through video, audio and chat.
 <!--END_DESCRIPTION-->
 
 ## Docs and references
@@ -25,7 +23,8 @@ The repo containing the (server side) agent implementations (including example a
 
 ## Try out a live version
 
-You can try out a demo of the playground with [KITT](https://kitt.livekit.io) or the [hosted playground](https://agents-playground.livekit.io) for your own agents.
+You can try out the agents playground at [https://livekit-agent-playground.vercel.app](https://livekit-agent-playground.vercel.app).
+This will connect you to our example agent, KITT, which is based off of the [minimal-assistant](https://github.com/livekit/agents/blob/main/examples/voice-pipeline-agent/minimal_assistant.py).
 
 ## Setting up the playground locally
 
@@ -71,9 +70,7 @@ NEXT_PUBLIC_LIVEKIT_URL=wss://<Your Cloud URL>
 - Mobile device sizes not supported currently
 
 <!--BEGIN_REPO_NAV-->
-
 <br/><table>
-
 <thead><tr><th colspan="2">LiveKit Ecosystem</th></tr></thead>
 <tbody>
 <tr><td>LiveKit SDKs</td><td><a href="https://github.com/livekit/client-sdk-js">Browser</a> · <a href="https://github.com/livekit/client-sdk-swift">iOS/macOS/visionOS</a> · <a href="https://github.com/livekit/client-sdk-android">Android</a> · <a href="https://github.com/livekit/client-sdk-flutter">Flutter</a> · <a href="https://github.com/livekit/client-sdk-react-native">React Native</a> · <a href="https://github.com/livekit/rust-sdks">Rust</a> · <a href="https://github.com/livekit/node-sdks">Node.js</a> · <a href="https://github.com/livekit/python-sdks">Python</a> · <a href="https://github.com/livekit/client-sdk-unity">Unity</a> · <a href="https://github.com/livekit/client-sdk-unity-web">Unity (WebGL)</a></td></tr><tr></tr>
