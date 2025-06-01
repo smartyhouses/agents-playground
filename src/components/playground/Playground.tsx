@@ -275,37 +275,6 @@ export default function Playground({
             />
           </div>
           
-          <div className="flex flex-col gap-2 mt-4">
-            <div className="text-xs text-gray-500 mt-2">RPC Method</div>
-            <input
-              type="text"
-              value={rpcMethod}
-              onChange={(e) => setRpcMethod(e.target.value)}
-              className="w-full text-white text-sm bg-transparent border border-gray-800 rounded-sm px-3 py-2"
-              placeholder="RPC method name"
-            />
-            
-            <div className="text-xs text-gray-500 mt-2">RPC Payload</div>
-            <textarea
-              value={rpcPayload}
-              onChange={(e) => setRpcPayload(e.target.value)}
-              className="w-full text-white text-sm bg-transparent border border-gray-800 rounded-sm px-3 py-2"
-              placeholder="RPC payload"
-              rows={2}
-            />
-            
-            <button
-              onClick={handleRpcCall}
-              disabled={!voiceAssistant.agent || !rpcMethod}
-              className={`mt-2 px-2 py-1 rounded-sm text-xs 
-                ${voiceAssistant.agent && rpcMethod 
-                  ? `bg-${config.settings.theme_color}-500 hover:bg-${config.settings.theme_color}-600` 
-                  : 'bg-gray-700 cursor-not-allowed'
-                } text-white`}
-            >
-              Perform RPC Call
-            </button>
-          </div>
           
         </ConfigurationPanelItem>
         
