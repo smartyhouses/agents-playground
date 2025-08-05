@@ -47,7 +47,7 @@ export const ConnectionProvider = ({
           setToastMessage({
             type: "error",
             message:
-              "Failed to generate token, you may need to increase your role in this LiveKit Cloud project.",
+              "Failed to generate token, you may need to increase your role in this project.",
           });
         }
         url = cloudWSUrl;
