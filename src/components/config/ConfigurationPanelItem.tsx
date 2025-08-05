@@ -20,16 +20,34 @@ export const ConfigurationPanelItem: React.FC<ConfigurationPanelItemProps> = ({
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
+  // Map Track.Source to the string values accepted by TrackToggle
+  const getToggleSource = (source: Track.Source): string | undefined => {
+    switch (source) {
+      case Track.Source.Camera:
+        return "camera";
+      case Track.Source.Microphone:
+        return "microphone";
+      case Track.Source.ScreenShare:
+        return "screen_share";
+      case Track.Source.ScreenShareAudio:
+        return "screen_share_audio";
+      default:
+        return undefined;
+    }
+  };
+
+  const toggleSource = source ? getToggleSource(source) : undefined;
+
   return (
     <div className="w-full text-gray-300 py-4 border-b border-b-gray-800 relative">
       <div className="flex flex-row justify-between items-center px-4 text-xs uppercase tracking-wider">
         <h3>{title}</h3>
         <div className="flex items-center gap-2">
-          {source && (
+          {toggleSource && (
             <span className="flex flex-row gap-2">
               <TrackToggle
                 className="px-2 py-1 bg-gray-900 text-gray-300 border border-gray-800 rounded-sm hover:bg-gray-800"
-                source={source}
+                source={toggleSource as any} // or you can refine this further
               />
               {source === Track.Source.Camera && (
                 <PlaygroundDeviceSelector kind="videoinput" />
